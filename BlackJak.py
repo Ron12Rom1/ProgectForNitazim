@@ -14,9 +14,25 @@ def create_deck():
     deck = shuffle_deck(deck)
     return deck
 
-def print_board(board):
-    for card in board:
-        print(card)
+# def print_board(board):
+#     for card in board:
+#         print(card)
+
+def print_game_status(players):
+    players.pop(0)
+    for player in players:
+        print("         ", player["name"], end='' )
+    print(" \n")
+    for player in players:
+        print("         ", player["cards"], end='' )
+    print(" \n")
+
+    print("Dealer: ", player["cards"],)
+        
+
+
+
+
 
 
 def shuffle_deck(deck):
@@ -73,10 +89,22 @@ def create_player():
 
 def create_playersInfo():
     players = list()
+    players.append({
+        "name": "Dealer",
+        "money": 100,
+        "cards": []
+    })
     for i in range(player_count):
         players.append(create_player())
     return players
 
+
+
+def give_players_cards(players, deck):
+    for player in players:
+        card = random.choice(deck)
+        deck.remove(card)
+        player["cards"] = card
 
 ##################################################################
 ##################################################################
@@ -111,7 +139,26 @@ def main():
     #* Game Starts
     #----------------------------------------------------------------
     while True:
-        
+        ########
+        #*Evry one place a bet
+
+        #* Give players 2 cards (open and close) (dealer too) (if dealer under 16 take another one and if above 18 he cant take notheing)
+
+        #* ask players to choose to take a card or pass or do split(only if two of a kind)
+
+        #* for each player check if score higher then 21 if not 
+        #*check if score lower then dealer's score
+
+        #* select the winner
+        #################### 
+
+        print("\n\=======================n\nGame Starts!!\n\n")
+
+        print("Giving players cards...\n")
+        give_players_cards(players, deck)
+        print_game_status(players)
+
+
 
 
 
